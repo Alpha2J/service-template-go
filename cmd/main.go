@@ -1,6 +1,6 @@
 package main
 
-import _ "service-template-go/internal/app/demo"
+import _ "service-template-go/internal/app"
 
 func main() {
 	//logger.Debug("hello from debug logger")

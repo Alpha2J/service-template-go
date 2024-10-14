@@ -1,11 +1,13 @@
-package demo
+package app
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"net/http"
-	"service-template-go/internal/app/demo/controller"
+	"service-template-go/internal/app/controller"
+	"service-template-go/internal/pkg/config"
 )
 
 func init() {
@@ -17,8 +19,9 @@ func init() {
 		Compress:   true, // disabled by default
 	})
 
-	// todo change mode
-	//gin.SetMode(gin.ReleaseMode)
+	if config.Config.Env == config.ENV_PROD {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	r := gin.Default()
 	r.Use(gin.LoggerWithWriter(logWriteSyncer))
 
@@ -31,8 +34,7 @@ func init() {
 	rgV1 := r.Group("/v1")
 	controller.AddUserRoutes(rgV1)
 
-	// todo change port
-	err := r.Run()
+	err := r.Run(":" + fmt.Sprintf("%d", config.Config.App.Port))
 	if err != nil {
 		return
 	}

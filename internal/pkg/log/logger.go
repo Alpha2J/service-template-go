@@ -46,6 +46,16 @@ func init() {
 	infoLogger = zap.New(infoZapCore)
 	sugaredInfoLogger = infoLogger.Sugar()
 
+	//env := config.GetEnv()
+	//pe := zap.NewProductionEncoderConfig()
+	//consoleEncoder := zapcore.NewConsoleEncoder(pe)
+	//if env == "local" {
+	//	infoZapCore = zapcore.NewTee(
+	//		infoZapCore,
+	//		zapcore.NewCore(consoleEncoder, zapcore.AddSync(os.Stdout), zap.InfoLevel),
+	//	)
+	//}
+
 	warnWriteSyncer := zapcore.AddSync(&lumberjack.Logger{
 		Filename:   "logs/app.warn.log",
 		MaxSize:    200, // megabytes

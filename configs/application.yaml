@@ -1,3 +1,9 @@
-application:
+env: local
+app:
   name: demo
   port: 8080
+mysql:
+  user: admin
+  password: nopwd
+  dbname: mydb
+
