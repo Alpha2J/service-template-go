@@ -8,7 +8,7 @@ import (
 	"service-template-go/internal/app/demo/controller"
 )
 
-func Init() {
+func init() {
 	logWriteSyncer := zapcore.AddSync(&lumberjack.Logger{
 		Filename:   "logs/gin.log",
 		MaxSize:    200, // megabytes
@@ -18,7 +18,7 @@ func Init() {
 	})
 
 	// todo change mode
-	gin.SetMode(gin.ReleaseMode)
+	//gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	r.Use(gin.LoggerWithWriter(logWriteSyncer))
 

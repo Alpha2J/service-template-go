@@ -1,0 +1,3 @@
+application:
+  name: demo
+  port: 8080
